@@ -3,216 +3,270 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Архиватор ChatGPT — сохраните длинный чат как редактируемый текст</title>
-  <meta name="description" content="Архиватор ChatGPT собирает длинные переписки, сохраняет их локально, копирует в редакторы и переносит в Google Docs. Первые 5 сохранений бесплатно.">
-  <meta name="theme-color" content="#0f5fd7">
+  <title>Сохранить чат ChatGPT целиком — Архиватор для Chrome</title>
+  <meta name="description" content="Архиватор ChatGPT помогает сохранить длинный чат целиком: собирает переписку, продолжает архив, восстанавливает оборванный сбор и переносит текст в Google Docs. 5 сохранений бесплатно.">
+  <meta name="theme-color" content="#071a36">
+  <meta property="og:title" content="Архиватор ChatGPT — длинные чаты в редактируемом виде">
+  <meta property="og:description" content="Не скриншот и не одноразовый PDF: локальный архив, продолжение переписки и перенос в Google Docs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naeirae.github.io/ChatGPT-Conversation-Archiver-production/">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/Naeirae/ChatGPT-Conversation-Archiver-production/production-v0.4.0-build/icons/icon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Naeirae/ChatGPT-Conversation-Archiver-production/production-v0.4.0-build/icons/icon-32.png">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Naeirae/ChatGPT-Conversation-Archiver-production/production-v0.4.0-build/icons/icon-128.png">
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Архиватор ChatGPT",
+    "applicationCategory":"BrowserApplication",
+    "operatingSystem":"Chrome",
+    "description":"Расширение Chrome для сохранения длинных чатов ChatGPT в редактируемом виде и переноса в Google Docs.",
+    "offers":[
+      {"@type":"Offer","price":"249","priceCurrency":"RUB","name":"30 дней"},
+      {"@type":"Offer","price":"1790","priceCurrency":"RUB","name":"1 год"},
+      {"@type":"Offer","price":"3490","priceCurrency":"RUB","name":"Бессрочно"}
+    ]
+  }
+  </script>
 </head>
 <body>
+  <div class="page-glow page-glow-one" aria-hidden="true"></div>
+  <div class="page-glow page-glow-two" aria-hidden="true"></div>
+
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Архиватор ChatGPT">
-      <img src="../icons/icon-64.png" alt="">
+      <span class="brand-icon"><img src="https://raw.githubusercontent.com/Naeirae/ChatGPT-Conversation-Archiver-production/production-v0.4.0-build/icons/icon-64.png" alt=""></span>
       <span>Архиватор ChatGPT</span>
     </a>
     <nav class="nav" aria-label="Основная навигация">
-      <a href="#features">Возможности</a>
-      <a href="#privacy">Как хранятся данные</a>
-      <a href="#price">Цена</a>
-      <a href="#terms">Условия</a>
-      <a href="#seller">Реквизиты</a>
-      <a class="nav-cta" href="#install">Попробовать</a>
+      <a href="#difference">Отличия</a>
+      <a href="#how">Как работает</a>
+      <a href="#privacy">Приватность</a>
+      <a href="#price">Тарифы</a>
+      <a class="nav-cta" href="#install">Попробовать бесплатно</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero">
       <div class="hero-copy">
-        <span class="eyebrow">Расширение для Chrome</span>
-        <h1>Сохраните длинный чат ChatGPT как нормальный редактируемый текст</h1>
-        <p class="hero-lead">Архиватор проходит переписку от начала до зафиксированного конца, сохраняет её локально и помогает перенести результат в Google Docs или любой редактор через буфер обмена.</p>
+        <div class="hero-badges">
+          <span class="pill pill-blue">Расширение для Chrome</span>
+          <span class="pill">5 сохранений бесплатно</span>
+        </div>
+        <h1>Сохраните длинный чат ChatGPT <span>целиком и в редактируемом виде</span></h1>
+        <p class="hero-lead">Не фотография страницы и не одноразовая выгрузка. Архиватор проходит длинную переписку, сохраняет результат локально, умеет продолжать уже созданный архив и переносить текст в Google Docs.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#install">Попробовать 5 сохранений бесплатно</a>
-          <a class="button secondary" href="#how">Как это работает</a>
+          <a class="button primary" href="#install">Попробовать бесплатно</a>
+          <a class="button ghost" href="#difference">Чем отличается</a>
         </div>
-        <ul class="hero-points">
-          <li>без скриншотов и PDF;</li>
-          <li>без аккаунта Архиватора;</li>
-          <li>содержимое чатов не отправляется на сервер разработчика.</li>
-        </ul>
+        <div class="trust-row">
+          <span>● без аккаунта Архиватора</span>
+          <span>● чаты не уходят на наш сервер</span>
+          <span>● Google Docs и copy-anywhere</span>
+        </div>
       </div>
 
-      <div class="product-preview" aria-label="Схема интерфейса Архиватора">
-        <div class="preview-top">
-          <div class="preview-brand"><img src="../icons/icon-32.png" alt=""><strong>Архиватор ChatGPT</strong></div>
-          <span class="preview-version">v0.4</span>
+      <div class="hero-visual">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="browser-frame glass">
+          <div class="browser-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span>chatgpt.com / длинный рабочий чат</span>
+          </div>
+          <div class="conversation-lines">
+            <div class="line user-line"><b>Вы</b><span></span><span></span></div>
+            <div class="line ai-line"><b>ChatGPT</b><span></span><span></span><span></span></div>
+            <div class="line user-line faded"><b>Вы</b><span></span></div>
+            <div class="line ai-line faded"><b>ChatGPT</b><span></span><span></span></div>
+          </div>
+          <div class="archiver-card">
+            <div class="archiver-head">
+              <div><img src="https://raw.githubusercontent.com/Naeirae/ChatGPT-Conversation-Archiver-production/production-v0.4.0-build/icons/icon-32.png" alt=""><strong>Архиватор</strong></div>
+              <span class="status-dot">готов</span>
+            </div>
+            <div class="progress-copy">
+              <span>Собираем переписку</span>
+              <strong>длинный чат → архив</strong>
+            </div>
+            <div class="progress"><span></span></div>
+            <div class="mini-actions">
+              <span>Локально</span><span>Продолжить</span><span>Google Docs</span>
+            </div>
+          </div>
         </div>
-        <div class="preview-access">
-          <span>Бесплатный доступ</span>
-          <strong>5 осталось</strong>
-        </div>
-        <div class="preview-card">
-          <div class="preview-row"><span>Текущий чат</span><em>Готово</em></div>
-          <strong>Собрать чат целиком</strong>
-          <div class="preview-select">В фоновой вкладке</div>
-          <div class="preview-button">Собрать чат</div>
-        </div>
-        <div class="preview-list">
-          <div><span>Сохранённые чаты</span><b>12</b></div>
-          <div><span>Незавершённые сборы</span><b>1</b></div>
-        </div>
+        <div class="floating-note note-one glass"><strong>Не потерять середину</strong><span>проход с подгрузкой сообщений</span></div>
+        <div class="floating-note note-two glass"><strong>Не начинать заново</strong><span>восстановление и продолжение</span></div>
       </div>
     </section>
 
-    <section class="problem">
-      <div>
-        <span class="eyebrow">Когда чат становится рабочим материалом</span>
-        <h2>Обычный экспорт быстро перестаёт быть удобным</h2>
-      </div>
-      <p>В длинной переписке часть сообщений может находиться вне текущей страницы. Скриншоты не ищутся по тексту, PDF неудобно редактировать, а ручное копирование сотен сообщений отнимает время. Архиватор собирает именно структуру переписки, а не фотографию страницы.</p>
+    <section class="signal-strip" aria-label="Ключевые преимущества">
+      <div><strong>Длинные чаты</strong><span>не только то, что сейчас видно на экране</span></div>
+      <div><strong>Редактируемый текст</strong><span>поиск, копирование, правки и повторное использование</span></div>
+      <div><strong>Продолжение архива</strong><span>добавляйте новые сообщения к уже сохранённому</span></div>
+      <div><strong>Private-first</strong><span>содержимое переписки остаётся в браузере</span></div>
     </section>
 
-    <section id="features" class="section">
+    <section id="difference" class="section market-section">
+      <div class="section-head wide">
+        <span class="eyebrow">Почему появился Архиватор</span>
+        <h2>Проблема не в том, чтобы нажать «Export». Проблема — получить пригодный архив длинного рабочего чата.</h2>
+        <p>Пользователи жалуются на огромные общие JSON-выгрузки, неполное копирование длинных веток и экспорт только уже загруженной части разговора. У некоторых расширений прямо в инструкции приходится сначала вручную прокручивать чат вверх, чтобы старые сообщения вообще попали в экспорт. Архиватор строится вокруг другой задачи: пройти длинную переписку, сохранить состояние прохода и потом продолжить архив, а не просто скачать текущую страницу.</p>
+      </div>
+
+      <div class="compare-grid">
+        <article class="pain-card">
+          <span class="card-label">Типичная боль</span>
+          <h3>«Экспорт есть, но в нём не весь длинный чат»</h3>
+          <p>Виртуализированные страницы подгружают сообщения частями. Ручное копирование и некоторые экспортеры видят только уже загруженный DOM.</p>
+          <div class="answer"><b>У Архиватора</b><span>отдельный проход по переписке с подгрузкой сообщений и зафиксированной границей конца.</span></div>
+        </article>
+        <article class="pain-card">
+          <span class="card-label">Типичная боль</span>
+          <h3>«Получил PDF — а дальше с ним ничего не сделать»</h3>
+          <p>PDF удобен как снимок, но рабочий материал обычно нужно искать, редактировать, цитировать и переносить дальше.</p>
+          <div class="answer"><b>У Архиватора</b><span>редактируемый текст, локальная библиотека, буфер обмена и Google Docs.</span></div>
+        </article>
+        <article class="pain-card">
+          <span class="card-label">Типичная боль</span>
+          <h3>«Чат вырос — приходится экспортировать всё заново»</h3>
+          <p>Обычная выгрузка не знает, где закончилась предыдущая версия архива.</p>
+          <div class="answer"><b>У Архиватора</b><span>подтверждённый стык и продолжение только новыми сообщениями.</span></div>
+        </article>
+        <article class="pain-card">
+          <span class="card-label">Типичная боль</span>
+          <h3>«Проход оборвался — результат пропал»</h3>
+          <p>На длинной переписке один сбой особенно дорог: повторный сбор может занять заметное время.</p>
+          <div class="answer"><b>У Архиватора</b><span>checkpoint незавершённого прохода: открыть, проверить, продолжить или удалить.</span></div>
+        </article>
+      </div>
+      <p class="research-note">Архиватор не обещает магическую «100% выгрузку любого объёма»: предельный масштаб отдельно проходит live-тесты. Его отличие — сама архитектура длинного прохода, восстановления и продолжения.</p>
+    </section>
+
+    <section id="how" class="section workflow-section">
       <div class="section-head">
-        <span class="eyebrow">Что умеет</span>
-        <h2>Собрать, продолжить и не потерять уже сделанное</h2>
+        <span class="eyebrow">Как сохранить чат ChatGPT целиком</span>
+        <h2>Один рабочий поток вместо ручного копирования по кускам</h2>
       </div>
-      <div class="feature-grid">
-        <article>
-          <h3>Собирает длинный чат</h3>
-          <p>Физически прокручивает рабочую вкладку и заставляет браузер подгружать сообщения, которые не находятся на экране.</p>
-        </article>
-        <article>
-          <h3>Фиксирует конец на момент запуска</h3>
-          <p>Новые сообщения, появившиеся после старта, не должны случайно попасть в текущий снимок.</p>
-        </article>
-        <article>
-          <h3>Продолжает сохранённый архив</h3>
-          <p>Находит подтверждённый стык и добавляет только новые сообщения вместо полного повторного сбора.</p>
-        </article>
-        <article>
-          <h3>Восстанавливает оборванный проход</h3>
-          <p>Незавершённая часть сохраняется отдельно: её можно открыть, проверить, продолжить или удалить.</p>
-        </article>
-        <article>
-          <h3>Не продолжает наугад</h3>
-          <p>Если точку продолжения нельзя подтвердить, Архиватор останавливается вместо того, чтобы создать дубли.</p>
-        </article>
-        <article>
-          <h3>Сохраняет редактируемый результат</h3>
-          <p>Текст можно искать, копировать и менять. Сохраняются ссылки, списки, код, таблицы и изображения, когда их удаётся получить.</p>
-        </article>
+      <div class="workflow">
+        <article><span>01</span><div><h3>Откройте чат</h3><p>Выберите нужную переписку ChatGPT и запустите Архиватор.</p></div></article>
+        <article><span>02</span><div><h3>Запустите сбор</h3><p>Архиватор фиксирует нижнюю границу и проходит чат, подгружая более ранние сообщения.</p></div></article>
+        <article><span>03</span><div><h3>Получите редактируемый архив</h3><p>Просматривайте его локально, копируйте целиком или отправляйте в Google Docs.</p></div></article>
+        <article><span>04</span><div><h3>Вернитесь позже</h3><p>Если чат продолжился, добавьте новые сообщения к существующему архиву вместо полного повторного прохода.</p></div></article>
       </div>
     </section>
 
-    <section id="how" class="section split">
+    <section class="section output-section">
+      <div class="output-copy">
+        <span class="eyebrow">Не запираем результат в одном формате</span>
+        <h2>Архив остаётся рабочим текстом</h2>
+        <p>Поиск по тексту, правки, цитирование и перенос в другие инструменты остаются доступными после сохранения.</p>
+      </div>
+      <div class="output-stack">
+        <article class="glass"><div class="output-icon">⌂</div><div><strong>Локальная библиотека</strong><p>Сохранённые и незавершённые архивы остаются в Chrome.</p></div></article>
+        <article class="glass"><div class="output-icon">⌘</div><div><strong>Копирование куда угодно</strong><p>Word, Notion, CMS, письмо или любой другой редактор.</p></div></article>
+        <article class="glass"><div class="output-icon">G</div><div><strong>Google Docs</strong><p>Новый документ или подтверждённое продолжение уже связанного архива.</p></div></article>
+      </div>
+    </section>
+
+    <section id="privacy" class="section privacy-section">
+      <div class="privacy-panel">
+        <div>
+          <span class="eyebrow light">Private-first</span>
+          <h2>Чат не должен ехать на чужой сервер только ради сохранения</h2>
+          <p>Содержимое переписок обрабатывается в браузере. Готовые архивы и recovery-состояние хранятся локально. Собственного аккаунта Архиватора нет.</p>
+          <p>При переносе в Google Docs используется ваша сессия Google. Лицензионный ключ проверяется локально и не требует профиля пользователя.</p>
+        </div>
+        <div class="data-flow">
+          <div><span>1</span><p><b>ChatGPT</b><small>ваша вкладка браузера</small></p></div>
+          <i></i>
+          <div><span>2</span><p><b>Архиватор</b><small>локальная обработка</small></p></div>
+          <i></i>
+          <div><span>3</span><p><b>Ваш архив</b><small>Chrome / Google Docs</small></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="price" class="section pricing-section">
+      <div class="pricing-shell">
+        <div class="section-head centered">
+          <span class="eyebrow">Тарифы</span>
+          <h2>Сначала пять реальных сохранений. Потом решайте, нужен ли Архиватор дальше.</h2>
+          <p>Бесплатные попытки списываются только за успешно завершённые сохранения. Оборванный технический проход сам по себе лимит не расходует.</p>
+        </div>
+
+        <div class="free-banner">
+          <div><span class="free-number">5</span><div><strong>сохранений бесплатно</strong><small>без карты и без аккаунта Архиватора</small></div></div>
+          <a class="button ghost-dark" href="#install">Начать с бесплатных</a>
+        </div>
+
+        <div class="price-grid">
+          <article class="price-card">
+            <div class="plan-top"><span>30 дней</span><small>для разовой задачи</small></div>
+            <strong class="price">249 ₽</strong>
+            <ul><li>полный функционал</li><li>локальные архивы</li><li>Google Docs</li></ul>
+            <span class="button plan-button disabled" aria-disabled="true">Оплата подключается</span>
+          </article>
+
+          <article class="price-card featured">
+            <div class="popular">Оптимальный</div>
+            <div class="plan-top"><span>1 год</span><small>для регулярной работы</small></div>
+            <strong class="price">1 790 ₽</strong>
+            <div class="saving">≈ 149 ₽/месяц · на 40% дешевле 12 месячных лицензий</div>
+            <ul><li>полный функционал</li><li>локальные архивы</li><li>Google Docs</li></ul>
+            <span class="button primary disabled" aria-disabled="true">Оплата подключается</span>
+          </article>
+
+          <article class="price-card">
+            <div class="plan-top"><span>Бессрочно</span><small>одна покупка</small></div>
+            <strong class="price">3 490 ₽</strong>
+            <ul><li>бессрочная лицензия</li><li>локальная активация</li><li>без автопродления</li></ul>
+            <span class="button plan-button disabled" aria-disabled="true">Оплата подключается</span>
+          </article>
+        </div>
+        <p class="fine-print centered">После подтверждённой оплаты выдаётся цифровой лицензионный ключ. Физической доставки нет.</p>
+      </div>
+    </section>
+
+    <section class="section faq-section">
       <div class="section-head">
-        <span class="eyebrow">Как проходит сбор</span>
-        <h2>Пять простых шагов</h2>
+        <span class="eyebrow">Коротко о главном</span>
+        <h2>Вопросы про экспорт и сохранение ChatGPT</h2>
       </div>
-      <ol class="steps">
-        <li><span>1</span><div><strong>Откройте нужный чат</strong><p>Архиватор работает с текущей перепиской ChatGPT.</p></div></li>
-        <li><span>2</span><div><strong>Выберите режим</strong><p>Основной — фоновая рабочая вкладка. Текущая вкладка остаётся резервным вариантом.</p></div></li>
-        <li><span>3</span><div><strong>Нажмите «Собрать чат»</strong><p>Архиватор зафиксирует нижнюю границу и начнёт проход.</p></div></li>
-        <li><span>4</span><div><strong>Дождитесь завершения</strong><p>Если проход оборвётся, уже собранная часть останется доступна для восстановления.</p></div></li>
-        <li><span>5</span><div><strong>Используйте результат</strong><p>Оставьте его локально, скопируйте целиком или перенесите в Google Docs.</p></div></li>
-      </ol>
-    </section>
-
-    <section class="section output">
-      <div class="section-head">
-        <span class="eyebrow">Куда сохранять</span>
-        <h2>Не привязывает архив к одному формату</h2>
+      <div class="faq-grid">
+        <details open><summary>Как сохранить длинный чат ChatGPT целиком?</summary><p>Откройте нужную переписку и запустите Архиватор. Он проходит чат и подгружает сообщения по ходу сбора, а не ограничивается текущей видимой областью страницы.</p></details>
+        <details><summary>Можно ли перенести ChatGPT в Google Docs?</summary><p>Да. Готовый архив можно перенести в новый Google Doc, а для связанного архива — добавлять подтверждённое продолжение.</p></details>
+        <details><summary>Можно ли просто скопировать результат в Word или Notion?</summary><p>Да. Архив можно копировать через буфер обмена и использовать в любом редакторе, который принимает обычный текст.</p></details>
+        <details><summary>Что произойдёт, если сбор длинного чата оборвётся?</summary><p>Незавершённый проход сохраняется отдельно. Его можно открыть и продолжить; Архиватор не должен заставлять начинать всё с нуля после каждого сбоя.</p></details>
+        <details><summary>Чаты отправляются на сервер разработчика?</summary><p>Нет. Содержимое чата обрабатывается в браузере и хранится локально; собственный сервер для содержимого переписок не используется.</p></details>
+        <details><summary>Это официальный продукт OpenAI?</summary><p>Нет. «Архиватор ChatGPT» — независимое расширение и не аффилирован с OpenAI.</p></details>
       </div>
-      <div class="output-grid">
-        <article><strong>Локальная библиотека</strong><p>Готовые архивы остаются в Chrome и доступны для продолжения.</p></article>
-        <article><strong>Буфер обмена</strong><p>Скопируйте архив и вставьте его в Word, Notion, CMS, письмо или другой редактор.</p></article>
-        <article><strong>Google Docs</strong><p>Перенесите архив в новый документ или добавьте подтверждённое продолжение в уже связанный.</p></article>
-      </div>
-      <p class="fine-print">Для крупных архивов в продукте предусмотрено разбиение экспорта на части. Предельный объём для публичного обещания будет зафиксирован после отдельного live-теста.</p>
-    </section>
-
-    <section id="privacy" class="section privacy">
-      <div class="privacy-main">
-        <span class="eyebrow">Что происходит с перепиской</span>
-        <h2>Архиватору не нужен собственный аккаунт пользователя</h2>
-        <p>Содержимое чатов обрабатывается в браузере. Готовые архивы и незавершённые проходы хранятся в локальном хранилище расширения. При экспорте в Google Docs используется ваша открытая сессия Google.</p>
-        <p>Сервер разработчика для содержимого чатов не используется. Лицензионный ключ проверяется локально на устройстве и не содержит имя, email или телефон пользователя.</p>
-      </div>
-      <div class="privacy-list">
-        <div><strong>ChatGPT</strong><span>рабочая вкладка в вашем браузере</span></div>
-        <div><strong>Архив</strong><span>локальное хранилище Chrome</span></div>
-        <div><strong>Google Docs</strong><span>ваша сессия Google</span></div>
-        <div><strong>Лицензия</strong><span>локальная криптографическая проверка</span></div>
-      </div>
-    </section>
-
-    <section id="price" class="section pricing">
-      <div class="section-head centered">
-        <span class="eyebrow">Цена</span>
-        <h2>Сначала проверьте на своих чатах</h2>
-        <p>Первые пять успешно завершённых сохранений доступны бесплатно. Ошибка или незавершённый технический проход сохранение не расходуют.</p>
-      </div>
-      <div class="price-grid">
-        <article class="price-card">
-          <span>30 дней</span>
-          <strong>249 ₽</strong>
-          <p>Лицензия на использование Архиватора в течение 30 дней с момента выдачи ключа.</p>
-          <span class="button secondary disabled" aria-disabled="true">Оплата подключается</span>
-        </article>
-        <article class="price-card featured">
-          <span>1 год</span>
-          <strong>1 790 ₽</strong>
-          <p>Лицензия на использование Архиватора в течение 365 дней с момента выдачи ключа.</p>
-          <span class="button secondary disabled" aria-disabled="true">Оплата подключается</span>
-        </article>
-        <article class="price-card">
-          <span>Бессрочно</span>
-          <strong>3 490 ₽</strong>
-          <p>Бессрочная лицензия на использование текущей production-версии продукта в пределах условий лицензии.</p>
-          <span class="button secondary disabled" aria-disabled="true">Оплата подключается</span>
-        </article>
-      </div>
-      <p class="fine-print centered">Аккаунт Архиватора не требуется. После подтверждённой оплаты покупателю выдаётся подписанный лицензионный ключ. Физической доставки нет.</p>
     </section>
 
     <section id="terms" class="section legal-section">
-      <div class="section-head">
+      <div class="section-head compact">
         <span class="eyebrow">Условия предоставления</span>
-        <h2>Что именно получает покупатель</h2>
+        <h2>Что получает покупатель</h2>
       </div>
       <div class="legal-grid">
-        <article>
-          <h3>Цифровая лицензия</h3>
-          <p>Покупатель получает лицензионный ключ для production-версии «Архиватора ChatGPT». Ключ подтверждает право использования продукта в течение оплаченного срока либо бессрочно — в зависимости от выбранного тарифа.</p>
-        </article>
-        <article>
-          <h3>Когда начинается срок</h3>
-          <p>Для срочных тарифов срок лицензии начинается с момента выпуска ключа после подтверждения оплаты платёжной системой.</p>
-        </article>
-        <article>
-          <h3>Как выдаётся ключ</h3>
-          <p>После подтверждения платежа ключ показывается на странице успешной оплаты. Ключ можно скопировать и вставить в поле активации Архиватора.</p>
-        </article>
-        <article>
-          <h3>Доставка</h3>
-          <p>Товар не доставляется физически. Результат покупки — цифровой лицензионный ключ.</p>
-        </article>
+        <article><h3>Цифровая лицензия</h3><p>Лицензионный ключ для production-версии «Архиватора ChatGPT» на оплаченный срок либо бессрочно — в зависимости от тарифа.</p></article>
+        <article><h3>Начало срока</h3><p>Для срочных тарифов срок начинается с момента выпуска ключа после подтверждения оплаты платёжной системой.</p></article>
+        <article><h3>Выдача ключа</h3><p>После подтверждения платежа ключ показывается на странице успешной оплаты; его нужно вставить в поле активации Архиватора.</p></article>
+        <article><h3>Доставка</h3><p>Физической доставки нет. Результат покупки — цифровой лицензионный ключ.</p></article>
       </div>
     </section>
 
     <section id="refund" class="section legal-section">
-      <div class="section-head">
-        <span class="eyebrow">Отказ и возврат</span>
-        <h2>Как обратиться по вопросу возврата</h2>
-      </div>
       <div class="legal-copy">
-        <p>Для обращения по вопросу отказа от покупки, возврата денежных средств или технической ошибки при выдаче лицензии напишите на <a href="mailto:nekurismarieykjuri@gmail.com">nekurismarieykjuri@gmail.com</a>. В письме укажите дату и сумму платежа, тариф и идентификатор заказа, если он доступен.</p>
-        <p>Обращение рассматривается с учётом фактического состояния платежа, выдачи и активации лицензии и требований применимого законодательства. Если оплата подтверждена, но ключ не был выдан либо технически не активируется, сначала проводится проверка и восстановление выдачи ключа; если это невозможно, решается вопрос о возврате.</p>
+        <div><span class="eyebrow">Отказ и возврат</span><h2>Если возникла проблема с оплатой или лицензией</h2></div>
+        <div><p>Для обращения по вопросу отказа от покупки, возврата денежных средств или технической ошибки при выдаче лицензии напишите на <a href="mailto:nekurismarieykjuri@gmail.com">nekurismarieykjuri@gmail.com</a>. Укажите дату и сумму платежа, тариф и идентификатор заказа, если он доступен.</p><p>Обращение рассматривается с учётом состояния платежа, выдачи и активации лицензии и требований применимого законодательства. Если платёж подтверждён, но ключ не выдан или технически не активируется, сначала проверяется возможность восстановить выдачу; если это невозможно, решается вопрос о возврате.</p></div>
       </div>
     </section>
 
     <section id="seller" class="section seller-section">
-      <div class="section-head">
+      <div class="section-head compact">
         <span class="eyebrow">Продавец и контакты</span>
         <h2>Реквизиты</h2>
       </div>
@@ -226,34 +280,32 @@
           <div><dt>ИНН</dt><dd>972000733667</dd></div>
         </dl>
       </div>
-      <p class="fine-print">Персональные реквизиты продавца должны быть заполнены реальными данными до подачи ресурса на проверку платёжной системой.</p>
     </section>
 
     <section id="install" class="install">
-      <div>
-        <span class="eyebrow">Попробовать</span>
-        <h2>Пять сохранений — бесплатно</h2>
-        <p>Откройте нужный чат, запустите Архиватор и проверьте результат на своей реальной переписке.</p>
+      <div class="install-copy">
+        <img src="https://raw.githubusercontent.com/Naeirae/ChatGPT-Conversation-Archiver-production/production-v0.4.0-build/icons/icon-128.png" alt="">
+        <div>
+          <span class="eyebrow light">Архиватор ChatGPT</span>
+          <h2>Проверьте сначала на своём длинном чате</h2>
+          <p>Первые пять успешно завершённых сохранений — бесплатно.</p>
+        </div>
       </div>
       <div class="install-actions">
-        <span class="button primary disabled" aria-disabled="true">Ссылка на установку — перед запуском</span>
-        <a class="button secondary" href="mailto:nekurismarieykjuri@gmail.com">Связаться с разработчиком</a>
+        <span class="button white disabled" aria-disabled="true">Chrome Web Store — скоро</span>
+        <a class="button outline-light" href="mailto:nekurismarieykjuri@gmail.com">Написать разработчику</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div>
-      <strong>Архиватор ChatGPT</strong>
-      <span>© 2026 Naeirae</span>
-    </div>
-    <div>
-      <a href="../LICENSE">Лицензия</a>
-      <a href="../LEGAL_NOTICE.md">Правообладатель</a>
+    <div class="footer-brand"><img src="https://raw.githubusercontent.com/Naeirae/ChatGPT-Conversation-Archiver-production/production-v0.4.0-build/icons/icon-32.png" alt=""><div><strong>Архиватор ChatGPT</strong><span>© 2026 Naeirae · независимый продукт</span></div></div>
+    <div class="footer-links">
+      <a href="https://github.com/Naeirae/ChatGPT-Conversation-Archiver-production/blob/production-v0.4.0-build/LICENSE">Лицензия</a>
+      <a href="https://github.com/Naeirae/ChatGPT-Conversation-Archiver-production/blob/production-v0.4.0-build/LEGAL_NOTICE.md">Правообладатель</a>
       <a href="#terms">Условия</a>
       <a href="#refund">Возврат</a>
       <a href="#seller">Реквизиты</a>
-      <a href="mailto:nekurismarieykjuri@gmail.com">Поддержка</a>
     </div>
   </footer>
 </body>
