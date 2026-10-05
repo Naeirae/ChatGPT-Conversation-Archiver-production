@@ -1,0 +1,10 @@
+name = "chatgpt-archiver-payment-ru"
+main = "src/index.mjs"
+compatibility_date = "2026-10-05"
+
+[[kv_namespaces]]
+binding = "PAYMENTS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+ROBOKASSA_TEST_MODE = "1"
