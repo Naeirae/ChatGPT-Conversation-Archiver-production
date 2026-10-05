@@ -1,0 +1,57 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify extension sources
+        run: node scripts/verify.mjs
+      - name: Package extension
+        run: node scripts/package.mjs
+      - name: Upload extension package
+        uses: actions/upload-artifact@v4
+        with:
+          name: chatgpt-conversation-archiver
+          path: dist/extension
+          if-no-files-found: error
+
+  updater:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse PowerShell updater
+        shell: powershell
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Join-Path $PWD 'update.ps1'),
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+          Write-Host 'update.ps1 syntax OK'
+
+      - name: Smoke-test quiet updater launcher
+        shell: powershell
+        run: |
+          & "$env:WINDIR\System32\cscript.exe" //nologo ".\Update ChatGPT Archiver.vbs" --self-test
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+          Write-Host 'quiet updater launcher syntax OK'
