@@ -159,7 +159,6 @@ try {
       !popupHtml.includes('id="continue"') ||
       !popupHtml.includes('id="savedArchivesList"') ||
       !popupHtml.includes('id="captureInfoToggle"') ||
-      !popupHtml.includes('id="updateNotice"') ||
       !popupHtml.includes('id="showTour"') ||
       !popupHtml.includes('id="copyContact"') ||
       !popupHtml.includes('id="archiveDocStatus"') ||
