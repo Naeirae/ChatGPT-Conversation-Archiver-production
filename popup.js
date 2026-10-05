@@ -790,11 +790,15 @@ function renderEntitlement(entitlement = null) {
 
   $('licenseTitle').textContent = paid
     ? 'Лицензия активна'
-    : (remaining > 0 ? 'Бесплатный доступ' : 'Бесплатный лимит закончился');
+    : (status.licenseExpired ? 'Срок лицензии закончился' : (remaining > 0 ? 'Бесплатный доступ' : 'Бесплатный лимит закончился'));
   $('licenseBadge').textContent = paid ? 'Активна' : (remaining + ' осталось');
   $('licenseUsage').textContent = paid
-    ? (status.validUntil ? 'Оплаченный доступ до ' + new Date(status.validUntil).toLocaleDateString('ru-RU') : 'Новые сохранения доступны.')
-    : ('Использовано ' + used + ' из ' + total + ' сохранений.');
+    ? (status.validUntil
+        ? 'Новые сохранения доступны до ' + new Date(status.validUntil).toLocaleDateString('ru-RU') + '.'
+        : 'Новые сохранения доступны без ограничения по сроку.')
+    : ('Использовано ' + used + ' из ' + total + ' бесплатных сохранений.');
+
+  $('removeLicense')?.classList.toggle('hidden', !status.hasLicenseToken);
 }
 
 function render(data) {
@@ -954,6 +958,41 @@ async function exportToDoc(type, payload = {}) {
   if (!result?.ok) throw new Error(result?.error || 'Не удалось сохранить в Google Docs.');
   return result;
 }
+
+$('activateLicense').onclick = async () => {
+  const token = $('licenseKey').value.trim();
+  if (!token) {
+    $('licenseMessage').textContent = 'Вставьте лицензионный ключ.';
+    return;
+  }
+  $('activateLicense').disabled = true;
+  $('licenseMessage').textContent = 'Проверяю ключ…';
+  try {
+    const result = await chrome.runtime.sendMessage({ type: 'ARCHIVER_ACTIVATE_LICENSE', licenseToken: token });
+    if (!result?.ok) throw new Error(result?.error || 'Не удалось активировать лицензию.');
+    $('licenseMessage').textContent = 'Лицензия активирована.';
+    $('licenseKey').value = '';
+    await getState();
+  } catch (error) {
+    $('licenseMessage').textContent = error.message || String(error);
+  } finally {
+    $('activateLicense').disabled = false;
+  }
+};
+
+$('removeLicense').onclick = async () => {
+  $('removeLicense').disabled = true;
+  try {
+    const result = await chrome.runtime.sendMessage({ type: 'ARCHIVER_CLEAR_LICENSE' });
+    if (!result?.ok) throw new Error(result?.error || 'Не удалось удалить лицензионный ключ.');
+    $('licenseMessage').textContent = 'Лицензионный ключ удалён с этого устройства.';
+    await getState();
+  } catch (error) {
+    $('licenseMessage').textContent = error.message || String(error);
+  } finally {
+    $('removeLicense').disabled = false;
+  }
+};
 
 $('capture').onclick = async () => {
   $('capture').disabled = true;
