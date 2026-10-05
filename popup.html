@@ -122,13 +122,21 @@
       </div>
       <div id="licenseUsage" class="muted"></div>
       <details class="license-plans">
-        <summary>Тарифы и бонус</summary>
+        <summary>Тарифы и лицензия</summary>
         <div class="license-plan-grid">
-          <div><strong>249 ₽</strong><span>в месяц</span></div>
-          <div><strong>1 790 ₽</strong><span>в год</span></div>
+          <div><strong>249 ₽</strong><span>30 дней</span></div>
+          <div><strong>1 790 ₽</strong><span>1 год</span></div>
           <div><strong>3 490 ₽</strong><span>бессрочно</span></div>
         </div>
-        <p class="muted">После первых 5 сохранений можно получить ещё 5 один раз за подтверждённую публичную публикацию о продукте.</p>
+        <label class="field compact-field">
+          <span>Лицензионный ключ</span>
+          <input id="licenseKey" type="text" autocomplete="off" spellcheck="false" placeholder="Вставьте ключ после покупки">
+        </label>
+        <div class="license-actions">
+          <button id="activateLicense" class="primary compact-button" type="button">Активировать</button>
+          <button id="removeLicense" class="compact-button hidden" type="button">Удалить ключ</button>
+        </div>
+        <div id="licenseMessage" class="saved" aria-live="polite"></div>
       </details>
     </section>
 
