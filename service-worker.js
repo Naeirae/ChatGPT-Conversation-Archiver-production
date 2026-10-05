@@ -1281,8 +1281,12 @@ async function handleCaptureComplete(message) {
   if (message.mode !== 'compare') {
     await indexArchive(archive);
   }
-  if ((message.mode === 'resume-draft' || message.mode === 'retry-walk') && job.recoveryDraftId) {
-    await removeDraft(job.recoveryDraftId).catch(() => {});
+  const completedDraftIds = new Set([
+    job.draftId || '',
+    (message.mode === 'resume-draft' || message.mode === 'retry-walk') ? (job.recoveryDraftId || '') : ''
+  ].filter(Boolean));
+  for (const draftId of completedDraftIds) {
+    await removeDraft(draftId).catch(() => {});
   }
 
   if (job.captureTarget === 'copy' && job.captureTabId != null && job.captureTabId !== job.sourceTabId) {
@@ -3225,7 +3229,9 @@ chrome.tabs.onRemoved.addListener(async tabId => {
       job.sourceTabId ?? job.tabId,
       job.captureTarget === 'current'
         ? 'Текущая вкладка с перепиской была закрыта.'
-        : 'Рабочая копия с перепиской была закрыта. Можно повторить в обычном режиме.'
+        : 'Рабочая копия с перепиской была закрыта. Незавершённый проход можно продолжить.',
+      job.draftId || '',
+      Number(job.draftCount || 0)
     );
   }
 });
