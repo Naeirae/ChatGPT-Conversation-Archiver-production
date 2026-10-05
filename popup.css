@@ -940,7 +940,7 @@ main { padding:14px 16px 16px; }
   z-index:200;
   display:block;
   padding:0;
-  background:rgba(14,23,40,.10);
+  background:transparent;
 }
 .tour-spotlight {
   position:fixed;
@@ -948,9 +948,22 @@ main { padding:14px 16px 16px; }
   border:2px solid color-mix(in srgb,var(--accent) 78%,white);
   border-radius:10px;
   background:transparent;
-  box-shadow:0 0 0 999px rgba(14,23,40,.18), 0 0 0 4px color-mix(in srgb,var(--accent) 24%,transparent);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 24%,transparent);
   pointer-events:none;
 }
+body.tour-open {
+  width:730px;
+  max-width:730px;
+}
+body.tour-open main {
+  width:430px;
+}
+body.tour-open .header-popover {
+  right:auto;
+  left:16px;
+  max-width:398px;
+}
+
 .tour-card {
   position:fixed;
   z-index:210;
