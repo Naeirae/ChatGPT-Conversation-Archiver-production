@@ -1977,6 +1977,49 @@
     throw new Error('Не удалось надежно сопоставить хвост сохраненного архива с текущим чатом.');
   }
 
+  async function saveRecoveryCheckpoint(map, order, boundary, { force = false } = {}) {
+    const jobId = state.jobId;
+    if (!jobId || !boundary?.kind || !boundary?.key || !order.length) return;
+
+    const now = Date.now();
+    const last = state.recoveryCheckpoint || { at: 0, count: 0 };
+    if (!force && now - last.at < 2500 && order.length - last.count < 6) return;
+
+    const current = (await chrome.storage.local.get('activeCaptureJob')).activeCaptureJob || {};
+    if (current.jobId !== jobId) return;
+
+    const messages = order.map(id => map.get(id)).filter(Boolean);
+    if (!messages.length) return;
+
+    const draftId = current.draftId || ('draft-' + jobId);
+    const draft = {
+      id: draftId,
+      kind: 'capture-draft',
+      title: document.title.replace(/\s*[–—-]\s*ChatGPT\s*$/i, '').trim() || 'ChatGPT conversation',
+      sourceUrl: location.href,
+      capturedAt: new Date().toISOString(),
+      captureMode: current.captureMode || 'full',
+      capturePhase: current.phase || 'walk',
+      captureBoundary: current.captureBoundary || boundary,
+      navigationHighWater: Number(current.navigationHighWater || 0),
+      chronologicalCount: messages.length,
+      messages,
+      imageCount: messages.reduce((sum, item) => sum + (item.images ? item.images.length : 0), 0),
+      complete: false,
+      error: ''
+    };
+
+    await chrome.storage.local.set({
+      ['draft:' + draftId]: draft,
+      activeCaptureJob: Object.assign({}, current, {
+        draftId,
+        draftCount: messages.length,
+        updatedAt: now
+      })
+    });
+    state.recoveryCheckpoint = { at: now, count: messages.length };
+  }
+
   async function walkDown(map, order, settings, boundary, { bursts = 3 } = {}) {
     let stable = 0;
     let previousSignature = '';
@@ -2003,6 +2046,7 @@
           chronologicalCount: map.size,
           force: true
         });
+        await saveRecoveryCheckpoint(map, order, boundary, { force: true });
         return;
       }
 
@@ -2012,6 +2056,7 @@
         iteration: i + 1,
         chronologicalCount: map.size
       });
+      await saveRecoveryCheckpoint(map, order, boundary);
 
       // Downward capture must be deliberately granular. Large wheel bursts can
       // skip virtualized turns even though the boundary itself remains reachable.
@@ -2028,9 +2073,11 @@
           chronologicalCount: map.size,
           force: true
         });
+        await saveRecoveryCheckpoint(map, order, boundary, { force: true });
         return;
       }
       collect(map, order, settings);
+      await saveRecoveryCheckpoint(map, order, boundary);
 
       const nextSignature = visibleTurnSignature();
       if (nextSignature && nextSignature === signature && signature === previousSignature && map.size === previousSize) stable++;
