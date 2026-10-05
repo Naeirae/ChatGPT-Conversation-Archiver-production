@@ -14,7 +14,9 @@ const jsFiles = [
   'lib/tab-plan.mjs',
   'lib/document-parts.mjs',
   'lib/entitlement.mjs',
-  'scripts/license-tool.mjs'
+  'scripts/license-tool.mjs',
+  'payment-worker/src/core.mjs',
+  'payment-worker/src/index.mjs'
 ];
 
 const forbiddenArtifacts = [
@@ -243,7 +245,8 @@ const tests = spawnSync(process.execPath, [
   'tests/google-docs-baseline.test.mjs',
   'tests/tab-plan.test.mjs',
   'tests/document-parts.test.mjs',
-  'tests/entitlement.test.mjs'
+  'tests/entitlement.test.mjs',
+  'tests/payment-worker.test.mjs'
 ], {
   encoding: 'utf8'
 });
