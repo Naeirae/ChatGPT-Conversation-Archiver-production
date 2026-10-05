@@ -71,7 +71,8 @@ test('signed but expired license is recognized and rejected', async () => {
 });
 
 test('tampered license is rejected', async () => {
-  const tampered = EXPIRED_SIGNED_TOKEN.replace('test', 'best');
-  const result = await verifyLicenseToken(tampered);
+  const [body, signature] = EXPIRED_SIGNED_TOKEN.split('.');
+  const tamperedBody = body.slice(0, -1) + (body.endsWith('A') ? 'B' : 'A');
+  const result = await verifyLicenseToken(tamperedBody + '.' + signature);
   assert.equal(result.valid, false);
 });
