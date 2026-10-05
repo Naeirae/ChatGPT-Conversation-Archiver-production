@@ -13,7 +13,8 @@ const jsFiles = [
   'lib/google-docs-baseline.mjs',
   'lib/tab-plan.mjs',
   'lib/document-parts.mjs',
-  'lib/entitlement.mjs'
+  'lib/entitlement.mjs',
+  'scripts/license-tool.mjs'
 ];
 
 const forbiddenArtifacts = [
@@ -119,6 +120,8 @@ try {
   }
   if (!serviceWorkerSource.includes('createEntitlementStore') ||
       !serviceWorkerSource.includes('ARCHIVER_GET_ENTITLEMENT') ||
+      !serviceWorkerSource.includes('ARCHIVER_ACTIVATE_LICENSE') ||
+      !serviceWorkerSource.includes('ARCHIVER_CLEAR_LICENSE') ||
       !serviceWorkerSource.includes("assertCanStart('full')") ||
       !serviceWorkerSource.includes('recordSuccessfulSave')) {
     fail('service-worker.js: production entitlement integration is incomplete');
@@ -156,6 +159,9 @@ try {
   }
   if (!popupHtml.includes('id="licenseCard"') ||
       !popupHtml.includes('id="licenseUsage"') ||
+      !popupHtml.includes('id="licenseKey"') ||
+      !popupHtml.includes('id="activateLicense"') ||
+      !popupHtml.includes('id="removeLicense"') ||
       !popupHtml.includes('id="continue"') ||
       !popupHtml.includes('id="savedArchivesList"') ||
       !popupHtml.includes('id="captureInfoToggle"') ||
@@ -167,7 +173,9 @@ try {
     fail('popup.html: compact capture/archive/help/update controls are incomplete');
   }
   if (!popupJs.includes('function applyInterfaceAppearance') ||
-      !popupJs.includes('function normalizeInterfaceAppearance')) {
+      !popupJs.includes('function normalizeInterfaceAppearance') ||
+      !popupJs.includes("type: 'ARCHIVER_ACTIVATE_LICENSE'") ||
+      !popupJs.includes("type: 'ARCHIVER_CLEAR_LICENSE'")) {
     fail('popup.js: missing interface appearance layer');
   }
   const iconSizes = new Map([
