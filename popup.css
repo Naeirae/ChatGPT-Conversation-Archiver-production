@@ -1115,3 +1115,6 @@ main { padding:14px 16px 16px; }
 .license-plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 8px 0; }
 .license-plan-grid > div { display: flex; flex-direction: column; gap: 2px; padding: 8px; border: 1px solid var(--border, #dbe5f1); border-radius: 9px; }
 .license-plan-grid span { font-size: 11px; opacity: .75; }
+
+.license-actions { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+#licenseKey { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; }
