@@ -3085,6 +3085,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return { ok: true, archive: summarize(await getLastArchive()) };
       case 'ARCHIVER_GET_ENTITLEMENT':
         return { ok: true, entitlement: await entitlementStore.getStatus() };
+      case 'ARCHIVER_ACTIVATE_LICENSE':
+        return { ok: true, entitlement: await entitlementStore.activateLicense(message.licenseToken || '') };
+      case 'ARCHIVER_CLEAR_LICENSE':
+        return { ok: true, entitlement: await entitlementStore.clearLicense() };
       case 'ARCHIVER_PAUSE_CAPTURE':
         return await pauseCapture();
       case 'ARCHIVER_RESUME_CAPTURE':
