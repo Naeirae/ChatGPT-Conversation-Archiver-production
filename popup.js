@@ -1734,17 +1734,6 @@ $('copyContact').onclick = async () => {
   }
 };
 
-async function refreshUpdateNotice() {
-  const notice = $('updateNotice');
-  if (!notice) return;
-  const result = await chrome.runtime.sendMessage({ type: 'ARCHIVER_CHECK_UPDATE' }).catch(() => null);
-  const available = Boolean(result?.ok && result.available);
-  notice.classList.toggle('hidden', !available);
-  if (available) {
-    $('updateNoticeText').textContent = 'Доступно обновление ' + result.remoteVersion;
-  }
-}
-
 $('localVersion').textContent = chrome.runtime.getManifest().version || '—';
 
 $('reloadExtension').addEventListener('click', () => {
@@ -1762,7 +1751,6 @@ $('reloadExtension').addEventListener('click', () => {
     updateCaptureTargetHint($('captureTarget').value);
     renderInterfaceAppearanceControls(settings);
     applyInterfaceAppearance(settings);
-    await refreshUpdateNotice();
     await showWhatsNewIfNeeded();
     const result = await getState();
     if (result?.linkedDoc?.url && !$('docUrl').value) $('docUrl').value = result.linkedDoc.url;
