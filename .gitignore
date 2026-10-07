@@ -1,0 +1,14 @@
+# Updater/runtime artifacts
+updater-last.log
+.chatgpt-archiver-updater-state.json
+.archiver-update-backup/
+*.download
+
+# Local tooling
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+
+# Build artifacts
+dist/

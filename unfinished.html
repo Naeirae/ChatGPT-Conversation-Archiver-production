@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Незавершённый проход · Архиватор ChatGPT</title>
+  <link rel="stylesheet" href="unfinished.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <div class="eyebrow">Архиватор ChatGPT</div>
+        <h1 id="title">Незавершённый проход</h1>
+      </div>
+      <div class="actions">
+        <button id="jumpLast" class="primary">К последнему сохранённому</button>
+        <button id="resume" class="hidden">Дособрать</button>
+        <button id="openCapture" class="hidden">Открыть вкладку сбора</button>
+        <button id="copy">Скопировать</button>
+        <button id="delete" class="danger">Удалить</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Состояние</h2>
+      <div id="meta" class="meta"></div>
+      <div id="error" class="error-text"></div>
+    </section>
+
+    <section class="card">
+      <h2>Сверка с завершённым архивом</h2>
+      <div id="compare" class="meta">Сверяю…</div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Сохранённые сообщения</h2>
+        <span id="messageCount"></span>
+      </div>
+      <div id="messages" class="messages"></div>
+    </section>
+  </main>
+  <script src="unfinished.js"></script>
+</body>
+</html>

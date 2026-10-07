@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Разметка архива — ChatGPT Archiver</title>
+  <link rel="stylesheet" href="planner.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-main">
+      <div>
+        <div class="eyebrow">ChatGPT Archiver</div>
+        <h1>Разметка архива</h1>
+        <p id="archiveMeta" class="muted">Загружаю архив…</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="clearMarkers" class="secondary" disabled>Сбросить пометки</button>
+        <button id="exportTabbed" class="primary" disabled>Сохранить по вкладкам</button>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="dot tab-dot"></i> новая вкладка перед репликой</span>
+      <span><i class="dot heading-dot"></i> подзаголовок перед репликой</span>
+      <span><i class="dot document-dot"></i> новый Google Doc из-за лимита размера</span>
+      <span id="markerSummary" class="marker-summary"></span>
+    </div>
+    <p id="status" class="status">Пометки сохраняются автоматически локально.</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p>
+        Прокручивайте архив и ставьте пометки прямо у нужной реплики.
+        Первая вкладка Google Docs существует автоматически и считается первой. Для неё можно поставить подзаголовок у реплики №1. Если архив приближается к безопасному пределу размера Google Docs, экспорт автоматически продолжится в новом документе; границы частей показаны ниже, а счёт вкладок в каждой части начинается заново.
+      </p>
+    </section>
+    <section id="messages" class="messages" aria-live="polite"></section>
+  </main>
+
+  <template id="messageTemplate">
+    <article class="message-card">
+      <div class="document-boundary-label hidden">Новый Google Doc</div>
+      <div class="boundary-label hidden">Новая вкладка</div>
+      <div class="message-head">
+        <div>
+          <span class="message-number"></span>
+          <strong class="message-role"></strong>
+          <span class="image-count"></span>
+        </div>
+        <div class="marker-buttons">
+          <button class="marker-tab" type="button">Вкладка перед</button>
+          <button class="marker-heading" type="button">Подзаголовок</button>
+        </div>
+      </div>
+      <div class="heading-editor hidden">
+        <label>
+          <span>Подзаголовок</span>
+          <input class="heading-input" type="text" maxlength="160" placeholder="Название темы">
+        </label>
+      </div>
+      <div class="message-body"></div>
+      <div class="image-preview hidden"></div>
+      <button class="expand-message hidden" type="button">Показать полностью</button>
+    </article>
+  </template>
+
+  <script type="module" src="planner.js"></script>
+</body>
+</html>
