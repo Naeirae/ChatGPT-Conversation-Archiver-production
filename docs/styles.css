@@ -752,3 +752,92 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding-bottom: 84
   .answer { left: 22px; right: 22px; }
   .price { font-size: 38px; }
 }
+
+
+/* 2026-10 product-focused landing additions */
+.product-shot-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, .7fr);
+  gap: 72px;
+  align-items: center;
+}
+.product-shot-copy p {
+  max-width: 640px;
+  color: var(--muted);
+  font-size: 17px;
+}
+.feature-list {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+.feature-list li {
+  position: relative;
+  padding: 14px 16px 14px 42px;
+  border: 1px solid rgba(66,97,146,.12);
+  border-radius: 15px;
+  background: rgba(255,255,255,.64);
+}
+.feature-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 16px;
+  color: var(--green);
+  font-weight: 900;
+}
+.product-shot-card {
+  margin: 0;
+  padding: 22px;
+  border: 1px solid rgba(70,101,149,.13);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(111,92,255,.12), transparent 40%),
+    rgba(255,255,255,.72);
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(20px);
+}
+.product-shot-card img {
+  width: min(100%, 420px);
+  margin: 0 auto;
+  border-radius: 19px;
+  box-shadow: 0 22px 54px rgba(24,48,87,.20);
+}
+.product-shot-card figcaption {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
+.privacy-note-section { padding-top: 72px; }
+.privacy-note {
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: .32fr 1fr;
+  gap: 28px;
+  align-items: start;
+  border: 1px solid rgba(65,96,143,.12);
+  border-radius: 20px;
+  background: rgba(255,255,255,.62);
+}
+.privacy-note strong { color: #29446f; font-size: 15px; }
+.privacy-note p { margin: 0; color: var(--muted); font-size: 13px; }
+.policy-page {
+  width: min(820px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 72px 0 110px;
+}
+.policy-page h1 { font-size: clamp(42px, 7vw, 68px); }
+.policy-page h2 { margin-top: 42px; font-size: 28px; }
+.policy-page p { color: var(--muted); font-size: 16px; }
+.policy-back { display: inline-block; margin-bottom: 34px; color: #2d6fde; text-decoration: none; font-weight: 700; }
+
+@media (max-width: 900px) {
+  .product-shot-section { grid-template-columns: 1fr; gap: 36px; }
+  .product-shot-card { max-width: 520px; }
+}
+@media (max-width: 620px) {
+  .privacy-note { grid-template-columns: 1fr; gap: 8px; padding: 20px; }
+  .product-shot-card { padding: 14px; border-radius: 22px; }
+}
